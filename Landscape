@@ -37,6 +37,18 @@ def drawCircle( x, y , radius, pi):
     glVertext2f(x, y)
     glVertext2f()
 
+def drawBirds(x,y, width, height):
+    glBegin(GL_LINES)
+    glVertex2f(x,y)
+    glVertex2f(x+width,y+height)
+    glEnd()
+
+def drawBirds2(x,y, width, height):
+    glBegin(GL_LINES)
+    glVertex2f(x+width,y+height)
+    glVertex2f(x,y)
+    glEnd()
+
 def drawScene():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)  # clear the screen
     glLoadIdentity()  # reset position
@@ -67,7 +79,17 @@ def drawScene():
         n+=5
         glColor3f(0.0,1.0,0.0)
         drawSquare(n, 400,2,8)
-
+    
+    i = 0
+    j = 150
+    y2 = 700
+    while(i<5):
+        i+=1
+        j+=35
+        y2+= 8
+        glColor(0,0,0)
+        drawBirds(j,y2,5,5)
+        drawBirds2(j+5,y2+5,5,-5)
     glutSwapBuffers()  # important for double buffering
 
 def refresh2d(width, height):
