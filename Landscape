@@ -8,6 +8,8 @@ from OpenGL.GLU import *
 from math import *
 import random
 
+
+
 window = 0
 width, height = 800, 800  # window size
 
@@ -17,6 +19,7 @@ s3 = random.randint(0,10)
 rand = s/10
 rand2 = s2/10
 rand3 = s3/10
+
 def drawSquare(x, y, width, height):
     glBegin(GL_QUADS)  # start drawing a square
     glVertex2f(x, y)  # bottom left point
@@ -75,14 +78,13 @@ def drawLeaves(posx, posy, sides, radius):
         glVertex2f(cosine, sine)
     glEnd()
 
-
-
 def drawScene():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)  # clear the screen
     glLoadIdentity()  # reset position
     refresh2d(width, height)
 
 # background
+
     glColor3f(0.5, 0.5, 1.0)  # set color to blue
     drawSquare(0, 100, 1000, 1000)
 
@@ -95,7 +97,6 @@ def drawScene():
     drawTriangle(300, 400, 150, 290)
     drawTriangle2(450, 400, 150, 290)
 
-
 #layer 2
 
     glColor3f(rand2, rand3, rand)        # left mountain
@@ -107,6 +108,7 @@ def drawScene():
     drawTriangle2(300, 400, 200, 260)
 
 #layer3
+
     glColor3f(0.4, 0.0, 0.0)  # set color to green
     drawTrunk(610, 120, 35, 150)  # draw the tree stump on the screen
 
@@ -127,7 +129,7 @@ def drawScene():
     drawSun(650, 700, 32, 50)
 
 #birds
-    
+
     i = 0
     j = 150
     y2 = 700
@@ -155,7 +157,7 @@ glutInit()  # initialize glut
 glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE)
 glutInitWindowSize(width, height)  # set window size
 glutInitWindowPosition(0, 0)  # set window position
-wind = glutCreateWindow("CSC 322 Fall 2020 HW1")  # create window with title
+wind = glutCreateWindow("CSC 322 Fall 2020 Final Project")  # create window with title
 glutDisplayFunc(drawScene)  # set showScreen function callback
 glutIdleFunc(drawScene)  # draw all the time
 glutMainLoop()  # start everything
