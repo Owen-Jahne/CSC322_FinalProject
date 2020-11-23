@@ -1,15 +1,22 @@
-##
+###
 ### Adopted from https://stackabuse.com/brief-introduction-to-opengl-in-python-with-pyopengl/
 ### CSC 322 Fall 2020
 
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
+from math import *
+import random
 
 window = 0
 width, height = 800, 800  # window size
 
-
+s = random.randint(0,10)
+s2 = random.randint(0,10)
+s3 = random.randint(0,10)
+rand = s/10
+rand2 = s2/10
+rand3 = s3/10
 def drawSquare(x, y, width, height):
     glBegin(GL_QUADS)  # start drawing a square
     glVertex2f(x, y)  # bottom left point
@@ -32,31 +39,6 @@ def drawTriangle2(x, y, width, height):
     glVertex2f(x + width, y)
     glEnd()
 
-def drawSun(posx,posy,sides,radius):
-    glBegin(GL_POLYGON)
-    for i in range(100):
-        cosine = radius * cos(i*2*pi/sides)+posx
-        sine = radius * sin(i*2*pi/sides)+posy
-        glVertex2f(cosine,sine)
-    glEnd()
-    
-def drawTrunk(x, y, width, height): #tree trunk
-    glBegin(GL_QUADS)  # start drawing a square
-    glVertex2f(x, y)  # bottom left point
-    glVertex2f(x + width, y)  # bottom right point
-    glVertex2f(x + width, y + height)  # top right point
-    glVertex2f(x, y + height)  # top left point
-    glEnd()  # done drawing
-
-def drawLeaves(posx,posy,sides,radius):
-    glBegin(GL_POLYGON)
-    for i in range(100):
-        cosine = radius * cos(i*2*pi/sides)+posx
-        sine = radius * sin(i*2*pi/sides)+posy
-        glVertex2f(cosine,sine)
-    glEnd()
-
-
 def drawBirds(x,y, width, height):
     glBegin(GL_LINES)
     glVertex2f(x,y)
@@ -69,47 +51,82 @@ def drawBirds2(x,y, width, height):
     glVertex2f(x,y)
     glEnd()
 
+def drawSun(posx, posy, sides, radius):
+    glBegin(GL_POLYGON)
+    for i in range(100):
+        cosine = radius * cos(i * 2 * pi / sides) + posx
+        sine = radius * sin(i * 2 * pi / sides) + posy
+        glVertex2f(cosine, sine)
+    glEnd()
+
+def drawTrunk(x, y, width, height):  # tree trunk
+    glBegin(GL_QUADS)  # start drawing a square
+    glVertex2f(x, y)  # bottom left point
+    glVertex2f(x + width, y)  # bottom right point
+    glVertex2f(x + width, y + height)  # top right point
+    glVertex2f(x, y + height)  # top left point
+    glEnd()  # done drawing
+
+def drawLeaves(posx, posy, sides, radius):
+    glBegin(GL_POLYGON)
+    for i in range(100):
+        cosine = radius * cos(i * 2 * pi / sides ) + posx
+        sine = radius * sin(i * 2 * pi / sides ) + posy
+        glVertex2f(cosine, sine)
+    glEnd()
+
+
+
 def drawScene():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)  # clear the screen
     glLoadIdentity()  # reset position
     refresh2d(width, height)
 
-    glColor3f(0.0, 0.0, 1.0)  # set color to blue
+# background
+    glColor3f(0.5, 0.5, 1.0)  # set color to blue
     drawSquare(0, 100, 1000, 1000)
 
-    glColor3f(0.0, 1.0, 0.0)  # set color to green
+    glColor3f(0.0, 0.7, 0.0)  # set color to green
     drawSquare(0,0 , 1000, 400)
 
-    glColor3f(0.7, 0.1, 0.1)        # tallest mountain in back
+#layer 1
+
+    glColor3f(rand, rand2, rand3)        # tallest mountain in back
     drawTriangle(300, 400, 150, 290)
     drawTriangle2(450, 400, 150, 290)
 
-    glColor3f(1.0, 0.1, 0.2)        # left mountain
+
+#layer 2
+
+    glColor3f(rand2, rand3, rand)        # left mountain
     drawTriangle(350, 400, 200, 240)
     drawTriangle2(550, 400, 200, 240)
 
-    glColor3f(1.0, 0.4, 0.0)  # right mountain
+    glColor3f(rand3, rand, rand2)  # right mountain
     drawTriangle(100, 400, 200, 260)
     drawTriangle2(300, 400, 200, 260)
-    
-    glColor3f(0.0, 0.0, 0.0)  # set color to green
-    drawTrunk(600, 50, 50, 200) #draw the tree stump on the screen
 
-    glColor3f(0.0, 0.0, 0.0)  # set color to green
-    drawLeaves(600, 50, 50, 200)  # draw the tree stump on the screen
-    
-    glColor3f(1.0,1.0,0.0) #sun color yellow
-    drawSun(650,700,32,50)
+#layer3
+    glColor3f(0.4, 0.0, 0.0)  # set color to green
+    drawTrunk(610, 120, 35, 150)  # draw the tree stump on the screen
 
-
+    glColor3f(0.0, 0.5, 0.0)  # set color to green
+    drawLeaves(625, 250, 50, 50)  # draw the tree stump on the screen
 
     x = 0
     n = 0
-    while(x<160):
-        x+=1
-        n+=5
-        glColor3f(0.0,1.0,0.0)
-        drawSquare(n, 400,2,8)
+    while (x < 160):
+        x += 1
+        n += 5
+        glColor3f(0.0, 1.0, 0.0)
+        drawSquare(n, 400, 2, 8)
+
+#layer 4
+
+    glColor3f(1.0, 1.0, 0.0)  # sun color yellow
+    drawSun(650, 700, 32, 50)
+
+#birds
     
     i = 0
     j = 150
@@ -121,6 +138,8 @@ def drawScene():
         glColor(0,0,0)
         drawBirds(j,y2,5,5)
         drawBirds2(j+5,y2+5,5,-5)
+
+
     glutSwapBuffers()  # important for double buffering
 
 def refresh2d(width, height):
@@ -139,3 +158,4 @@ glutInitWindowPosition(0, 0)  # set window position
 wind = glutCreateWindow("CSC 322 Fall 2020 HW1")  # create window with title
 glutDisplayFunc(drawScene)  # set showScreen function callback
 glutIdleFunc(drawScene)  # draw all the time
+glutMainLoop()  # start everything
