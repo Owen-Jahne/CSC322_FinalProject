@@ -127,6 +127,56 @@ def drawScene():
 
     glColor3f(1.0, 1.0, 0.0)  # sun color yellow
     drawSun(650, 700, 32, 50)
+    
+    
+    
+#parallax
+def drawParallax(x_mouse, y_mouse):
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)  # clear the screen
+    glLoadIdentity()  # reset position
+    refresh2d(width, height)
+
+    foregroundX = (x_mouse - 250) * 0.5
+    foregroundY = (y_mouse - 250) * 0.5
+    triangleX = (x_mouse - 250) * 0.25
+    triangleY = (y_mouse - 250) * 0.25
+    # trunk
+    trunkX = (x_mouse - 250) * 0.5
+    trunkY = (y_mouse - 250) * 0.5
+    # sun
+    layer1X = (x_mouse - 250) * 0.02
+    layer1Y = (y_mouse - 250) * 0.02
+    # leaves
+    leavesX = (x_mouse - 250) * 0.02
+    leavesY = (x_mouse - 250) * 0.02
+
+    glColor3f(0.0, 0.0, 1.0)  # set color to blue
+    drawSquare(0, 0, 800, 800)
+
+    glColor3f(0.0, 1.0, 0.0)  # set color to green
+    drawSquare(0, 0, 1000, 400)
+
+    glColor3f(0.7, 0.1, 0.1)  # tallest mountain in back
+    drawTriangle(triangleX + 300, triangleY, 150, 290)
+    drawTriangle2(triangleX + 450, triangleY, 150, 290)
+
+    glColor3f(1.0, 0.1, 0.2)  # left mountain
+    drawTriangle(triangleX + 350, triangleY + 400, 200, 240)
+    drawTriangle2(triangleX + 550, triangleY + 400, 200, 240)
+
+    glColor3f(1.0, 0.4, 1.0)  # right mountain
+    drawTriangle(triangleX + 100, triangleY + 400, 200, 260)
+    drawTriangle2(triangleX + 300, triangleY + 400, 200, 260)
+
+    glColor3f(1.0, 1.0, 0.0)  # sun color yellow
+    drawSun(layer1X + 650, layer1Y + 700, 32, 50)
+
+    glColor3f(0.4, 0.0, 0.0)  # set color to brown
+    drawTrunk(trunkX + 617, trunkY + 120, 20, 150)  # draw the tree stump on the screen
+
+    glColor3f(0.0, 0.5, 0.0)  # set color to darkgreen
+    drawLeaves(leavesX + 625, leavesY + 250, 50, 50)  # draw the tree leaves on the screen
+
 
 #birds
 
@@ -160,4 +210,5 @@ glutInitWindowPosition(0, 0)  # set window position
 wind = glutCreateWindow("CSC 322 Fall 2020 Final Project")  # create window with title
 glutDisplayFunc(drawScene)  # set showScreen function callback
 glutIdleFunc(drawScene)  # draw all the time
+glutPassiveMotionFunc(drawParallax)
 glutMainLoop()  # start everything
