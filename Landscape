@@ -32,10 +32,30 @@ def drawTriangle2(x, y, width, height):
     glVertex2f(x + width, y)
     glEnd()
 
-def drawCircle( x, y , radius, pi):
-    glBegin(GL_CIRCLES)
-    glVertext2f(x, y)
-    glVertext2f()
+def drawSun(posx,posy,sides,radius):
+    glBegin(GL_POLYGON)
+    for i in range(100):
+        cosine = radius * cos(i*2*pi/sides)+posx
+        sine = radius * sin(i*2*pi/sides)+posy
+        glVertex2f(cosine,sine)
+    glEnd()
+    
+def drawTrunk(x, y, width, height): #tree trunk
+    glBegin(GL_QUADS)  # start drawing a square
+    glVertex2f(x, y)  # bottom left point
+    glVertex2f(x + width, y)  # bottom right point
+    glVertex2f(x + width, y + height)  # top right point
+    glVertex2f(x, y + height)  # top left point
+    glEnd()  # done drawing
+
+def drawLeaves(posx,posy,sides,radius):
+    glBegin(GL_POLYGON)
+    for i in range(100):
+        cosine = radius * cos(i*2*pi/sides)+posx
+        sine = radius * sin(i*2*pi/sides)+posy
+        glVertex2f(cosine,sine)
+    glEnd()
+
 
 def drawBirds(x,y, width, height):
     glBegin(GL_LINES)
@@ -71,6 +91,17 @@ def drawScene():
     glColor3f(1.0, 0.4, 0.0)  # right mountain
     drawTriangle(100, 400, 200, 260)
     drawTriangle2(300, 400, 200, 260)
+    
+    glColor3f(0.0, 0.0, 0.0)  # set color to green
+    drawTrunk(600, 50, 50, 200) #draw the tree stump on the screen
+
+    glColor3f(0.0, 0.0, 0.0)  # set color to green
+    drawLeaves(600, 50, 50, 200)  # draw the tree stump on the screen
+    
+    glColor3f(1.0,1.0,0.0) #sun color yellow
+    drawSun(650,700,32,50)
+
+
 
     x = 0
     n = 0
