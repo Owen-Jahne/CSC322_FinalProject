@@ -130,15 +130,13 @@ def drawParallax(x_mouse, y_mouse):
 
     triangleX3 = (x_mouse - 250) * 0.0425
     triangleY3 = (y_mouse - 250) * 0.0425
-    # trunk
-    trunkX = (x_mouse - 250) * 0.5
-    trunkY = (y_mouse - 250) * 0.5
+    
     # sun
     layer1X = (x_mouse - 250) * 0.02
     layer1Y = (y_mouse - 250) * 0.02
-    # leaves
-    leavesX = (x_mouse - 250) * 0.02
-    leavesY = (x_mouse - 250) * 0.02
+    #tree
+    treeX = (x_mouse - 250) * 0.02
+    treeY = (x_mouse - 250) * 0.02
 
     glColor3f(0.0, 0.0, 1.0)  # set color to blue
     drawSquare(0, 0, 800, 800)
@@ -162,10 +160,10 @@ def drawParallax(x_mouse, y_mouse):
     drawSun(layer1X + 650, layer1Y + 700, 32, 50)
 
     glColor3f(0.4, 0.0, 0.0)  # set color to brown
-    drawTrunk(trunkX + 617, trunkY + 120, 20, 150)  # draw the tree stump on the screen
+    drawTrunk(treeX + 617, treeY + 120, 20, 150)  # draw the tree stump on the screen
 
     glColor3f(0.0, 0.5, 0.0)  # set color to darkgreen
-    drawLeaves(leavesX + 625, leavesY + 250, 50, 50)  # draw the tree leaves on the screen
+    drawLeaves(treeX + 625, treeY + 250, 50, 50)  # draw the tree leaves on the screen
 
     x = 0
     n = 0
