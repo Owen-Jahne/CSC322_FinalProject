@@ -121,8 +121,15 @@ def drawParallax(x_mouse, y_mouse):
 
     foregroundX = (x_mouse - 250) * 0.5
     foregroundY = (y_mouse - 250) * 0.5
+    
     triangleX = (x_mouse - 250) * 0.25
     triangleY = (y_mouse - 250) * 0.25
+    
+    triangleX2 = (x_mouse - 250) * 0.025
+    triangleY2 = (y_mouse - 250) * 0.025
+
+    triangleX3 = (x_mouse - 250) * 0.0425
+    triangleY3 = (y_mouse - 250) * 0.0425
     # trunk
     trunkX = (x_mouse - 250) * 0.5
     trunkY = (y_mouse - 250) * 0.5
@@ -140,14 +147,14 @@ def drawParallax(x_mouse, y_mouse):
     drawSquare(0, 0, 1000, 400)
 
     glColor3f(0.7, 0.1, 0.1)  # tallest mountain in back
-    drawTriangle(triangleX + 300, triangleY, 150, 290)
-    drawTriangle2(triangleX + 450, triangleY, 150, 290)
+    drawTriangle(triangleX2 + 300, triangleY2, 150, 290)
+    drawTriangle2(triangleX2 + 450, triangleY2, 150, 290)
 
-    glColor3f(1.0, 0.1, 0.2)  # left mountain
-    drawTriangle(triangleX + 350, triangleY + 400, 200, 240)
-    drawTriangle2(triangleX + 550, triangleY + 400, 200, 240)
+    glColor3f(1.0, 0.1, 0.2)  # right mountain
+    drawTriangle(triangleX3 + 350, triangleY3 + 400, 200, 240)
+    drawTriangle2(triangleX3 + 550, triangleY3 + 400, 200, 240)
 
-    glColor3f(1.0, 0.4, 1.0)  # right mountain
+    glColor3f(1.0, 0.4, 1.0)  # left mountain
     drawTriangle(triangleX + 100, triangleY + 400, 200, 260)
     drawTriangle2(triangleX + 300, triangleY + 400, 200, 260)
 
