@@ -3,11 +3,7 @@ from OpenGL.GLUT import *
 from math import *
 import random
 
-
 width, height = 800, 800  # window size
-
-
-
 
 s = random.randint(0,10)
 s2 = random.randint(0,10)
@@ -16,9 +12,6 @@ rand = s/10
 rand2 = s2/10
 rand3 = s3/10
 
-
-
-
 def drawSun(posx,posy,sides,radius):
     glBegin(GL_POLYGON)
     for i in range(100):
@@ -26,7 +19,6 @@ def drawSun(posx,posy,sides,radius):
         sine = radius * sin(i*2*pi/sides)+posy
         glVertex2f(cosine,sine)
     glEnd()
-
 
 def drawSquare(x, y, width, height):
     glBegin(GL_QUADS)  # start drawing a square
@@ -78,10 +70,6 @@ def drawBirds2(x,y, width, height):
     glVertex2f(x,y)
     glEnd()
 
-
-
-
-
 def drawScene():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)  # clear the screen
     glLoadIdentity()  # reset position
@@ -94,84 +82,87 @@ def drawScene():
     drawSquare(0,0 , 1000, 400)
 
     glColor3f(rand, rand2, rand3)        # tallest mountain in back
-    drawTriangle(300, 400, 150, 290)
-    drawTriangle2(450, 400, 150, 290)
+    drawTriangle(300, 350, 150, 290)
+    drawTriangle2(450, 350, 150, 290)
 
     glColor3f(rand2, rand3, rand)        # left mountain
-    drawTriangle(350, 400, 200, 240)
-    drawTriangle2(550, 400, 200, 240)
+    drawTriangle(350, 350, 200, 240)
+    drawTriangle2(550, 350, 200, 240)
 
     glColor3f(rand3, rand, rand2)  # right mountain
-    drawTriangle(100, 400, 200, 260)
-    drawTriangle2(300, 400, 200, 260)
+    drawTriangle(100, 350, 200, 260)
+    drawTriangle2(300, 350, 200, 260)
 
     glColor3f(1.0,1.0,0.0) #sun color yellow
     drawSun(650,700,32,50)
 
     glColor3f(0.4, 0.0, 0.0)  # set color to green
-    drawTrunk(617,120,20,150) #draw the tree stump on the screen
+    drawTrunk(617,320,20,150) #draw the tree stump on the screen
 
     glColor3f(0.0, 0.5, 0.0)  # set color to darkgreen
-    drawLeaves(625, 250, 50, 50)  # draw the tree leaves on the screen
+    drawLeaves(625, 450, 50, 50)  # draw the tree leaves on the screen
 
 def drawParallax(x_mouse, y_mouse):
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)  # clear the screen
     glLoadIdentity()  # reset position
     refresh2d(width, height)
 
-    foregroundX = (x_mouse - 250) * 0.5
-    foregroundY = (y_mouse - 250) * 0.5
-    
-    triangleX = (x_mouse - 250) * 0.25
-    triangleY = (y_mouse - 250) * 0.25
-    
-    triangleX2 = (x_mouse - 250) * 0.025
-    triangleY2 = (y_mouse - 250) * 0.025
+    foregroundX = (x_mouse - 400) * 0.5
+    foregroundY = (y_mouse - 400) * 0.5
+    triangleX = (x_mouse - 400) * 0.0625
+    triangleY = (y_mouse - 400) * 0.0625
 
-    triangleX3 = (x_mouse - 250) * 0.0425
-    triangleY3 = (y_mouse - 250) * 0.0425
-    
+    triangleX2 = (x_mouse - 400) * 0.025
+    triangleY2 = (y_mouse - 400) * 0.025
+
+    triangleX3 = (x_mouse - 400) * 0.0425
+    triangleY3 = (y_mouse - 400) * 0.0425
+
+    # trunk
+    trunkX = (x_mouse - 400) * 0.1
+    trunkY = (y_mouse - 400) * 0.05
     # sun
-    layer1X = (x_mouse - 250) * 0.02
-    layer1Y = (y_mouse - 250) * 0.02
-    #tree
-    treeX = (x_mouse - 250) * 0.02
-    treeY = (x_mouse - 250) * 0.02
+    layer1X = (x_mouse - 400) * 0.02
+    layer1Y = (y_mouse - 400) * 0.02
+    # leaves
+    leavesX = (x_mouse - 400) * 0.1
+    leavesY = (x_mouse - 400) * 0.05
 
     glColor3f(0.0, 0.0, 1.0)  # set color to blue
     drawSquare(0, 0, 800, 800)
 
+
+    glColor3f(rand, rand2, rand3)  # tallest mountain in back
+    drawTriangle(triangleX2 + 300, 350 + triangleY2, 150, 290)
+    drawTriangle2(triangleX2 + 450,350 + triangleY2, 150, 290)
+
+    glColor3f(rand2, rand3, rand)  # right mountain
+    drawTriangle(triangleX3 + 350, triangleY3 + 350, 200, 240)
+    drawTriangle2(triangleX3 + 550, triangleY3 + 350, 200, 240)
+
+    glColor3f(rand3, rand, rand2)  # left mountain
+    drawTriangle(triangleX + 100, triangleY + 350, 200, 260)
+    drawTriangle2(triangleX + 300, triangleY + 350, 200, 260)
+
     glColor3f(0.0, 1.0, 0.0)  # set color to green
     drawSquare(0, 0, 1000, 400)
 
-    glColor3f(0.7, 0.1, 0.1)  # tallest mountain in back
-    drawTriangle(triangleX2 + 300, triangleY2, 150, 290)
-    drawTriangle2(triangleX2 + 450, triangleY2, 150, 290)
-
-    glColor3f(1.0, 0.1, 0.2)  # right mountain
-    drawTriangle(triangleX3 + 350, triangleY3 + 400, 200, 240)
-    drawTriangle2(triangleX3 + 550, triangleY3 + 400, 200, 240)
-
-    glColor3f(1.0, 0.4, 1.0)  # left mountain
-    drawTriangle(triangleX + 100, triangleY + 400, 200, 260)
-    drawTriangle2(triangleX + 300, triangleY + 400, 200, 260)
+    x = 0
+    n = 0
+    while (x < 160):
+        x += 1
+        n += 5
+        glColor3f(0.0, 1.0, 0.0)
+        drawSquare(n, 400, 2, 8)
 
     glColor3f(1.0, 1.0, 0.0)  # sun color yellow
     drawSun(layer1X + 650, layer1Y + 700, 32, 50)
 
     glColor3f(0.4, 0.0, 0.0)  # set color to brown
-    drawTrunk(treeX + 617, treeY + 120, 20, 150)  # draw the tree stump on the screen
+    drawTrunk(trunkX + 617, trunkY + 320, 20, 150)  # draw the tree stump on the screen
 
     glColor3f(0.0, 0.5, 0.0)  # set color to darkgreen
-    drawLeaves(treeX + 625, treeY + 250, 50, 50)  # draw the tree leaves on the screen
-
-    x = 0
-    n = 0
-    while(x<160):
-        x+=1
-        n+=5
-        glColor3f(0.0,1.0,0.0)
-        drawSquare(n, 400,2,8)
+    drawLeaves(leavesX + 625, leavesY + 450, 50, 50)  # draw the tree leaves on the screen
 
     i = 0
     j = 150
