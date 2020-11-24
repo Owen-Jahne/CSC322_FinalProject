@@ -12,7 +12,6 @@ rand = s / 10
 rand2 = s2 / 10
 rand3 = s3 / 10
 
-
 def drawSun(posx, posy, sides, radius):
     glBegin(GL_POLYGON)
     for i in range(100):
@@ -20,7 +19,6 @@ def drawSun(posx, posy, sides, radius):
         sine = radius * sin(i * 2 * pi / sides) + posy
         glVertex2f(cosine, sine)
     glEnd()
-
 
 def drawSquare(x, y, width, height):
     glBegin(GL_QUADS)  # start drawing a square
@@ -30,7 +28,6 @@ def drawSquare(x, y, width, height):
     glVertex2f(x, y + height)  # top left point
     glEnd()  # done drawing
 
-
 def drawTriangle(x, y, width, height):
     glBegin(GL_TRIANGLES)
     glVertex2f(x, y)
@@ -38,14 +35,12 @@ def drawTriangle(x, y, width, height):
     glVertex2f(x + width, y + height)
     glEnd()
 
-
 def drawTriangle2(x, y, width, height):
     glBegin(GL_TRIANGLES)
     glVertex2f(x, y)
     glVertex2f(x, y + height)
     glVertex2f(x + width, y)
     glEnd()
-
 
 def drawTrunk(x, y, width, height):  # tree trunk
     glBegin(GL_QUADS)  # start drawing a square
@@ -55,7 +50,6 @@ def drawTrunk(x, y, width, height):  # tree trunk
     glVertex2f(x, y + height)  # top left point
     glEnd()  # done drawing
 
-
 def drawLeaves(posx, posy, sides, radius):
     glBegin(GL_POLYGON)
     for i in range(100):
@@ -64,20 +58,17 @@ def drawLeaves(posx, posy, sides, radius):
         glVertex2f(cosine, sine)
     glEnd()
 
-
 def drawBirds(x, y, width, height):
     glBegin(GL_LINES)
     glVertex2f(x, y)
     glVertex2f(x + width, y + height)
     glEnd()
 
-
 def drawBirds2(x, y, width, height):
     glBegin(GL_LINES)
     glVertex2f(x + width, y + height)
     glVertex2f(x, y)
     glEnd()
-
 
 def drawScene():
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)  # clear the screen
@@ -111,14 +102,11 @@ def drawScene():
     glColor3f(0.0, 0.5, 0.0)  # set color to darkgreen
     drawLeaves(625, 450, 50, 50)  # draw the tree leaves on the screen
 
-
 def drawParallax(x_mouse, y_mouse):
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)  # clear the screen
     glLoadIdentity()  # reset position
     refresh2d(width, height)
 
-    foregroundX = (x_mouse - 400) * 0.5
-    foregroundY = (y_mouse - 400) * 0.5
     triangleX = (x_mouse - 400) * 0.0625
     triangleY = (y_mouse - 400) * 0.0625
 
@@ -131,6 +119,7 @@ def drawParallax(x_mouse, y_mouse):
     # tree
     treeX = (x_mouse - 400) * 0.15
     treeY = (y_mouse - 400) * 0.15
+
     # sun
     layer1X = (x_mouse - 400) * 0.02
     layer1Y = (y_mouse - 400) * 0.02
@@ -155,53 +144,4 @@ def drawParallax(x_mouse, y_mouse):
 
     x = 0
     n = -100
-    while (x < 240):
-        x += 1
-        n += 5
-        glColor3f(0.0, 1.0, 0.0)
-        drawSquare(n + treeX, 300 + treeY, 2, 8)
-
-    glColor3f(1.0, 1.0, 0.0)  # sun color yellow
-    drawSun(layer1X + 650, layer1Y + 700, 32, 50)
-
-    glColor3f(0.4, 0.0, 0.0)  # set color to brown
-    drawTrunk(treeX + 617, treeY + 220, 20, 150)  # draw the tree stump on the screen
-
-    glColor3f(0.0, 0.5, 0.0)  # set color to darkgreen
-    drawLeaves(treeX + 625, treeY + 350, 50, 50)  # draw the tree leaves on the screen
-
-    i = 0
-    j = 150
-    y2 = 700
-    while (i < 5):
-        i += 1
-        j += 35
-        y2 += 8
-        glColor(0, 0, 0)
-        drawBirds(j, y2, 5, 5)
-        drawBirds2(j + 5, y2 + 5, 5, -5)
-
-    glutSwapBuffers()  # important for double buffering
-
-
-def refresh2d(width, height):
-    glViewport(0, 0, width, height)
-    glMatrixMode(GL_PROJECTION)
-    glLoadIdentity()
-    glOrtho(0.0, width, 0.0, height, 0.0, 1.0)
-    glMatrixMode(GL_MODELVIEW)
-    glLoadIdentity()
-
-
-# initialization
-
-glutInit()  # initialize glut
-glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE)
-glutInitWindowSize(width, height)  # set window size
-glutInitWindowPosition(0, 0)  # set window position
-wind = glutCreateWindow("Landscape")  # create window with title
-glutDisplayFunc(drawScene)  # set showScreen function callback
-glutIdleFunc(drawScene)
-glutPassiveMotionFunc(drawParallax)
-# draw all the time
-glutMainLoop()  # start everything
+    while (x < 240): #loop for 240 blades of grass
