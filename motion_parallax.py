@@ -154,8 +154,8 @@ def drawParallax(x_mouse, y_mouse):
     drawSquare(-100 + treeX, -100 + treeY, 1000, 400)
 
     x = 0
-    n = 0
-    while (x < 160):
+    n = -100
+    while (x < 240):
         x += 1
         n += 5
         glColor3f(0.0, 1.0, 0.0)
